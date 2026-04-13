@@ -838,52 +838,200 @@
     
     <div class="modal" id="transaction-modal">
         <div class="modal-content">
-            <h3>添加交易</h3>
-            <div class="form-group">
-                <label>类型</label>
-                <div class="type-toggle">
-                    <button type="button" class="type-btn active" data-type="expense">支出</button>
-                    <button type="button" class="type-btn" data-type="income">收入</button>
+            <form id="transaction-form">
+                <h3>添加交易</h3>
+                <div class="form-group">
+                    <label>类型</label>
+                    <div class="type-toggle">
+                        <button type="button" class="type-btn active" data-type="expense">支出</button>
+                        <button type="button" class="type-btn" data-type="income">收入</button>
+                    </div>
+                    <input type="hidden" id="transaction-type" value="expense">
                 </div>
-                <input type="hidden" id="transaction-type" value="expense">
-            </div>
-            <div class="form-group">
-                <label>金额</label>
-                <input type="number" id="transaction-amount" step="0.01" min="0" required>
-            </div>
-            <div class="form-group">
-                <label>日期</label>
-                <input type="date" id="transaction-date" required>
-            </div>
-            <div class="form-group">
-                <label>账户</label>
-                <select id="transaction-account">
-                    <!-- 账户选项将在这里动态添加 -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label>标签</label>
-                <div class="tag-container" id="tag-container">
-                    <!-- 标签选项将在这里动态添加 -->
+                <div class="form-group">
+                    <label>金额</label>
+                    <input type="number" id="transaction-amount" step="0.01" min="0" required>
                 </div>
-                <input type="hidden" id="transaction-tags">
-            </div>
-            <div class="form-group">
-                <label>备注</label>
-                <textarea id="transaction-note" rows="2"></textarea>
-            </div>
-            <div class="form-group">
-                <label>输入模式</label>
-                <div class="mode-toggle">
-                    <button type="button" class="mode-btn active" data-mode="quick">快速模式</button>
-                    <button type="button" class="mode-btn" data-mode="batch">批量模式</button>
+                <div class="form-group">
+                    <label>日期</label>
+                    <input type="date" id="transaction-date" required>
                 </div>
-                <input type="hidden" id="input-mode" value="quick">
-            </div>
-            <div class="button-group">
-                <button type="button" class="btn btn-secondary" id="cancel-btn">取消</button>
-                <button type="submit" class="btn btn-primary">保存</button>
-            </div>
+                <div class="form-group">
+                    <label>账户</label>
+                    <select id="transaction-account">
+                        <!-- 账户选项将在这里动态添加 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>标签</label>
+                    <div class="tag-container" id="tag-container">
+                        <!-- 标签选项将在这里动态添加 -->
+                    </div>
+                    <input type="hidden" id="transaction-tags">
+                </div>
+                <div class="form-group">
+                    <label>备注</label>
+                    <textarea id="transaction-note" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>输入模式</label>
+                    <div class="mode-toggle">
+                        <button type="button" class="mode-btn active" data-mode="quick">快速模式</button>
+                        <button type="button" class="mode-btn" data-mode="batch">批量模式</button>
+                    </div>
+                    <input type="hidden" id="input-mode" value="quick">
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="account-modal">
+        <div class="modal-content">
+            <form id="account-form">
+                <h3 id="account-modal-title">添加账户</h3>
+                <input type="hidden" id="account-id">
+                <div class="form-group">
+                    <label>账户名称</label>
+                    <input type="text" id="account-name" required>
+                </div>
+                <div class="form-group">
+                    <label>初始金额</label>
+                    <input type="number" id="account-initial-balance" step="0.01" min="0" value="0">
+                </div>
+                <div class="form-group">
+                    <label>隐藏金额</label>
+                    <input type="checkbox" id="account-is-hidden">
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="cancel-account-btn">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="item-modal">
+        <div class="modal-content">
+            <form id="item-form">
+                <h3 id="item-modal-title">添加物品</h3>
+                <input type="hidden" id="item-id">
+                <div class="form-group">
+                    <label>物品名称</label>
+                    <input type="text" id="item-name" required>
+                </div>
+                <div class="form-group">
+                    <label>关联交易ID</label>
+                    <input type="text" id="item-transaction-id">
+                </div>
+                <div class="form-group">
+                    <label>开始日期</label>
+                    <input type="date" id="item-start-date" required>
+                </div>
+                <div class="form-group">
+                    <label>结束日期</label>
+                    <input type="date" id="item-end-date">
+                </div>
+                <div class="form-group">
+                    <label>状态</label>
+                    <select id="item-status">
+                        <option value="active">使用中</option>
+                        <option value="finished">已结束</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="cancel-item-btn">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="transfer-modal">
+        <div class="modal-content">
+            <form id="transfer-form">
+                <h3>转账</h3>
+                <div class="form-group">
+                    <label>转出账户</label>
+                    <select id="transfer-from-account" required>
+                        <!-- 账户选项将在这里动态添加 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>转入账户</label>
+                    <select id="transfer-to-account" required>
+                        <!-- 账户选项将在这里动态添加 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>转账金额</label>
+                    <input type="number" id="transfer-amount" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>备注</label>
+                    <textarea id="transfer-note" rows="2"></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="cancel-transfer-btn">取消</button>
+                    <button type="submit" class="btn btn-primary">确认转账</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="adjust-modal">
+        <div class="modal-content">
+            <form id="adjust-form">
+                <h3>调整资产</h3>
+                <div class="form-group">
+                    <label>账户</label>
+                    <select id="adjust-account" required>
+                        <!-- 账户选项将在这里动态添加 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>调整金额</label>
+                    <input type="number" id="adjust-amount" step="0.01" required>
+                    <small style="color: #999;">正数增加，负数减少</small>
+                </div>
+                <div class="form-group">
+                    <label>备注</label>
+                    <textarea id="adjust-note" rows="2"></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="cancel-adjust-btn">取消</button>
+                    <button type="submit" class="btn btn-primary">确认调整</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="tag-modal">
+        <div class="modal-content">
+            <form id="tag-form">
+                <h3 id="tag-modal-title">添加标签</h3>
+                <input type="hidden" id="tag-id">
+                <div class="form-group">
+                    <label>标签名称</label>
+                    <input type="text" id="tag-name" required>
+                </div>
+                <div class="form-group">
+                    <label>标签颜色</label>
+                    <input type="color" id="tag-color" value="#FF5722">
+                </div>
+                <div class="form-group">
+                    <label>标签表情</label>
+                    <input type="text" id="tag-emoji" placeholder="可选">
+                    <small style="color: #999;">输入emoji表情或空着</small>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="cancel-tag-btn">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
         </div>
     </div>
     
@@ -1010,7 +1158,6 @@
         // 应用逻辑
         class App {
             constructor() {
-                this.init();
                 this.selectedTags = [];
                 this.expenseChart = null;
                 this.tagChart = null;
@@ -1034,8 +1181,38 @@
                     searchEndDate: document.getElementById('search-end-date'),
                     accountList: document.getElementById('account-list'),
                     totalAssetsAmount: document.getElementById('total-assets-amount'),
-                    itemList: document.getElementById('item-list')
+                    itemList: document.getElementById('item-list'),
+                    accountModal: document.getElementById('account-modal'),
+                    accountId: document.getElementById('account-id'),
+                    accountName: document.getElementById('account-name'),
+                    accountInitialBalance: document.getElementById('account-initial-balance'),
+                    accountIsHidden: document.getElementById('account-is-hidden'),
+                    accountModalTitle: document.getElementById('account-modal-title'),
+                    itemModal: document.getElementById('item-modal'),
+                    itemId: document.getElementById('item-id'),
+                    itemName: document.getElementById('item-name'),
+                    itemTransactionId: document.getElementById('item-transaction-id'),
+                    itemStartDate: document.getElementById('item-start-date'),
+                    itemEndDate: document.getElementById('item-end-date'),
+                    itemStatus: document.getElementById('item-status'),
+                    itemModalTitle: document.getElementById('item-modal-title'),
+                    transferModal: document.getElementById('transfer-modal'),
+                    transferFromAccount: document.getElementById('transfer-from-account'),
+                    transferToAccount: document.getElementById('transfer-to-account'),
+                    transferAmount: document.getElementById('transfer-amount'),
+                    transferNote: document.getElementById('transfer-note'),
+                    adjustModal: document.getElementById('adjust-modal'),
+                    adjustAccount: document.getElementById('adjust-account'),
+                    adjustAmount: document.getElementById('adjust-amount'),
+                    adjustNote: document.getElementById('adjust-note'),
+                    tagModal: document.getElementById('tag-modal'),
+                    tagId: document.getElementById('tag-id'),
+                    tagName: document.getElementById('tag-name'),
+                    tagColor: document.getElementById('tag-color'),
+                    tagEmoji: document.getElementById('tag-emoji'),
+                    tagModalTitle: document.getElementById('tag-modal-title')
                 };
+                this.init();
             }
             
             init() {
@@ -1115,6 +1292,56 @@
                 document.getElementById('reset-search-btn').addEventListener('click', () => {
                     this.resetSearch();
                 });
+                
+                // 账户模态框事件
+                document.getElementById('cancel-account-btn').addEventListener('click', () => {
+                    this.hideAccountModal();
+                });
+                
+                document.getElementById('account-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveAccount();
+                });
+                
+                // 物品模态框事件
+                document.getElementById('cancel-item-btn').addEventListener('click', () => {
+                    this.hideItemModal();
+                });
+                
+                document.getElementById('item-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveItem();
+                });
+                
+                // 转账模态框事件
+                document.getElementById('cancel-transfer-btn').addEventListener('click', () => {
+                    this.hideTransferModal();
+                });
+                
+                document.getElementById('transfer-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveTransfer();
+                });
+                
+                // 调整资产模态框事件
+                document.getElementById('cancel-adjust-btn').addEventListener('click', () => {
+                    this.hideAdjustModal();
+                });
+                
+                document.getElementById('adjust-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveAdjust();
+                });
+                
+                // 标签模态框事件
+                document.getElementById('cancel-tag-btn').addEventListener('click', () => {
+                    this.hideTagModal();
+                });
+                
+                document.getElementById('tag-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveTag();
+                });
             }
             
             switchPage(page) {
@@ -1148,16 +1375,26 @@
             }
             
             showModal() {
+                // 重置表单
+                document.getElementById('transaction-form').reset();
+                this.selectedTags = [];
+                
+                // 设置默认日期为今天
+                this.setDefaultDate();
+                
+                // 填充账户选项
+                this.renderAccounts();
+                
+                // 渲染标签容器
+                this.renderTagContainer();
+                
+                // 显示模态框
                 this.elements.transactionModal.classList.add('active');
                 this.elements.transactionAmount.focus();
             }
             
             hideModal() {
                 this.elements.transactionModal.classList.remove('active');
-                document.getElementById('transaction-form').reset();
-                this.setDefaultDate();
-                this.selectedTags = [];
-                this.renderTags();
             }
             
             setDefaultDate() {
@@ -1191,6 +1428,40 @@
                     tagItem.innerHTML = `${tag.emoji} ${tag.name}`;
                     container.appendChild(tagItem);
                 });
+            }
+            
+            renderTagContainer() {
+                // 填充标签选项
+                const tagContainer = document.getElementById('tag-container');
+                tagContainer.innerHTML = '';
+                
+                const tags = Storage.getTags();
+                tags.forEach(tag => {
+                    const tagElement = document.createElement('div');
+                    tagElement.className = `tag-item ${this.selectedTags.includes(tag.id) ? 'selected' : ''}`;
+                    tagElement.dataset.tagId = tag.id;
+                    tagElement.style.backgroundColor = tag.color + '20'; // 20% opacity
+                    tagElement.style.borderColor = tag.color;
+                    tagElement.innerHTML = `
+                        <span class="tag-emoji">${tag.emoji}</span>
+                        <span class="tag-name">${tag.name}</span>
+                    `;
+                    tagContainer.appendChild(tagElement);
+                });
+                
+                // 添加"添加标签"按钮
+                const addTagButton = document.createElement('div');
+                addTagButton.className = 'tag-item add-tag-btn';
+                addTagButton.style.backgroundColor = 'rgba(255, 215, 0, 0.1)';
+                addTagButton.style.borderColor = '#ffd700';
+                addTagButton.innerHTML = `
+                    <span class="tag-emoji">+</span>
+                    <span class="tag-name">添加标签</span>
+                `;
+                addTagButton.addEventListener('click', () => {
+                    this.showTagModal();
+                });
+                tagContainer.appendChild(addTagButton);
             }
             
             updateSelectedTags() {
@@ -1550,7 +1821,7 @@
             bindAssetEvents() {
                 // 添加账户按钮
                 document.getElementById('add-account-btn').addEventListener('click', () => {
-                    this.addAccount();
+                    this.showAccountModal();
                 });
                 
                 // 显示/隐藏金额按钮
@@ -1577,20 +1848,62 @@
                 document.querySelectorAll('.edit-account-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const accountId = e.target.dataset.accountId;
-                        this.editAccount(accountId);
+                        const accounts = Storage.getAccounts();
+                        const account = accounts.find(a => a.id === accountId);
+                        if (account) {
+                            this.showAccountModal(account);
+                        }
                     });
                 });
             }
             
-            addAccount() {
-                const name = prompt('请输入账户名称:');
-                const initialBalance = parseFloat(prompt('请输入初始金额:')) || 0;
+            showAccountModal(account = null) {
+                if (account) {
+                    this.elements.accountId.value = account.id;
+                    this.elements.accountName.value = account.name;
+                    this.elements.accountInitialBalance.value = account.initial_balance;
+                    this.elements.accountIsHidden.checked = account.is_hidden;
+                    this.elements.accountModalTitle.textContent = '编辑账户';
+                } else {
+                    this.elements.accountId.value = '';
+                    this.elements.accountName.value = '';
+                    this.elements.accountInitialBalance.value = '0';
+                    this.elements.accountIsHidden.checked = false;
+                    this.elements.accountModalTitle.textContent = '添加账户';
+                }
+                this.elements.accountModal.classList.add('active');
+                this.elements.accountName.focus();
+            }
+            
+            hideAccountModal() {
+                this.elements.accountModal.classList.remove('active');
+                document.getElementById('account-form').reset();
+            }
+            
+            saveAccount() {
+                const id = this.elements.accountId.value || Date.now().toString();
+                const name = this.elements.accountName.value;
+                const initialBalance = parseFloat(this.elements.accountInitialBalance.value) || 0;
+                const isHidden = this.elements.accountIsHidden.checked;
                 
                 if (name) {
-                    const id = Date.now().toString();
-                    const account = new Account(id, name, initialBalance);
-                    Storage.saveAccount(account);
+                    const account = new Account(id, name, initialBalance, isHidden);
+                    
+                    if (this.elements.accountId.value) {
+                        // 编辑现有账户
+                        const accounts = Storage.getAccounts();
+                        const index = accounts.findIndex(a => a.id === id);
+                        if (index !== -1) {
+                            accounts[index] = account;
+                            localStorage.setItem('accounts', JSON.stringify(accounts));
+                        }
+                    } else {
+                        // 添加新账户
+                        Storage.saveAccount(account);
+                    }
+                    
                     this.calculateAccountBalances();
+                    this.hideAccountModal();
                 }
             }
             
@@ -1606,30 +1919,165 @@
             
             showTransferModal() {
                 const accounts = Storage.getAccounts();
-                let fromAccount = prompt('请输入转出账户名称:');
-                let toAccount = prompt('请输入转入账户名称:');
-                let amount = parseFloat(prompt('请输入转账金额:'));
+                const fromSelect = this.elements.transferFromAccount;
+                const toSelect = this.elements.transferToAccount;
                 
-                if (fromAccount && toAccount && amount) {
-                    // 简化处理，实际应该根据账户名称查找ID
-                    this.transferFunds(fromAccount, toAccount, amount);
+                // 清空并填充账户选项
+                fromSelect.innerHTML = '';
+                toSelect.innerHTML = '';
+                
+                accounts.forEach(account => {
+                    const fromOption = document.createElement('option');
+                    fromOption.value = account.id;
+                    fromOption.textContent = account.name;
+                    fromSelect.appendChild(fromOption);
+                    
+                    const toOption = document.createElement('option');
+                    toOption.value = account.id;
+                    toOption.textContent = account.name;
+                    toSelect.appendChild(toOption);
+                });
+                
+                // 默认选中不同的账户
+                if (accounts.length >= 2) {
+                    toSelect.selectedIndex = 1;
+                }
+                
+                // 重置表单
+                this.elements.transferAmount.value = '';
+                this.elements.transferNote.value = '';
+                
+                // 显示模态框
+                this.elements.transferModal.classList.add('active');
+                this.elements.transferAmount.focus();
+            }
+            
+            hideTransferModal() {
+                this.elements.transferModal.classList.remove('active');
+                document.getElementById('transfer-form').reset();
+            }
+            
+            saveTransfer() {
+                const fromAccountId = this.elements.transferFromAccount.value;
+                const toAccountId = this.elements.transferToAccount.value;
+                const amount = parseFloat(this.elements.transferAmount.value);
+                const note = this.elements.transferNote.value;
+                
+                if (fromAccountId && toAccountId && amount) {
+                    if (fromAccountId === toAccountId) {
+                        alert('转出账户和转入账户不能相同');
+                        return;
+                    }
+                    
+                    // 简化实现，实际应该创建两条转账记录
+                    const accounts = Storage.getAccounts();
+                    const fromAccount = accounts.find(a => a.id === fromAccountId);
+                    const toAccount = accounts.find(a => a.id === toAccountId);
+                    
+                    if (fromAccount && toAccount) {
+                        // 这里应该创建转账记录，现在只是模拟
+                        alert(`从 ${fromAccount.name} 转账 ¥${amount.toFixed(2)} 到 ${toAccount.name}`);
+                        this.calculateAccountBalances();
+                        this.hideTransferModal();
+                    }
                 }
             }
             
-            transferFunds(fromAccount, toAccount, amount) {
-                // 简化实现，实际应该创建两条转账记录
-                alert(`从 ${fromAccount} 转账 ¥${amount.toFixed(2)} 到 ${toAccount}`);
-                this.calculateAccountBalances();
+            showAdjustModal() {
+                const accounts = Storage.getAccounts();
+                const accountSelect = this.elements.adjustAccount;
+                
+                // 清空并填充账户选项
+                accountSelect.innerHTML = '';
+                
+                accounts.forEach(account => {
+                    const option = document.createElement('option');
+                    option.value = account.id;
+                    option.textContent = account.name;
+                    accountSelect.appendChild(option);
+                });
+                
+                // 重置表单
+                this.elements.adjustAmount.value = '';
+                this.elements.adjustNote.value = '';
+                
+                // 显示模态框
+                this.elements.adjustModal.classList.add('active');
+                this.elements.adjustAmount.focus();
             }
             
-            showAdjustModal() {
-                const account = prompt('请输入要调整的账户名称:');
-                const amount = parseFloat(prompt('请输入调整金额（正数增加，负数减少）:'));
+            hideAdjustModal() {
+                this.elements.adjustModal.classList.remove('active');
+                document.getElementById('adjust-form').reset();
+            }
+            
+            saveAdjust() {
+                const accountId = this.elements.adjustAccount.value;
+                const amount = parseFloat(this.elements.adjustAmount.value);
+                const note = this.elements.adjustNote.value;
                 
-                if (account && amount) {
-                    // 简化处理，实际应该创建调整记录
-                    alert(`调整 ${account} 金额: ¥${amount.toFixed(2)}`);
-                    this.calculateAccountBalances();
+                if (accountId && amount) {
+                    // 简化实现，实际应该创建调整记录
+                    const accounts = Storage.getAccounts();
+                    const account = accounts.find(a => a.id === accountId);
+                    
+                    if (account) {
+                        // 这里应该创建调整记录，现在只是模拟
+                        alert(`调整 ${account.name} 金额: ¥${amount.toFixed(2)}`);
+                        this.calculateAccountBalances();
+                        this.hideAdjustModal();
+                    }
+                }
+            }
+            
+            showTagModal(tag = null) {
+                if (tag) {
+                    this.elements.tagId.value = tag.id;
+                    this.elements.tagName.value = tag.name;
+                    this.elements.tagColor.value = tag.color;
+                    this.elements.tagEmoji.value = tag.emoji;
+                    this.elements.tagModalTitle.textContent = '编辑标签';
+                } else {
+                    this.elements.tagId.value = '';
+                    this.elements.tagName.value = '';
+                    this.elements.tagColor.value = '#FF5722';
+                    this.elements.tagEmoji.value = '';
+                    this.elements.tagModalTitle.textContent = '添加标签';
+                }
+                this.elements.tagModal.classList.add('active');
+                this.elements.tagName.focus();
+            }
+            
+            hideTagModal() {
+                this.elements.tagModal.classList.remove('active');
+                document.getElementById('tag-form').reset();
+            }
+            
+            saveTag() {
+                const id = this.elements.tagId.value || Date.now().toString();
+                const name = this.elements.tagName.value;
+                const color = this.elements.tagColor.value;
+                const emoji = this.elements.tagEmoji.value;
+                
+                if (name) {
+                    const tag = new Tag(id, name, color, emoji);
+                    
+                    if (this.elements.tagId.value) {
+                        // 编辑现有标签
+                        const tags = Storage.getTags();
+                        const index = tags.findIndex(t => t.id === id);
+                        if (index !== -1) {
+                            tags[index] = tag;
+                            localStorage.setItem('tags', JSON.stringify(tags));
+                        }
+                    } else {
+                        // 添加新标签
+                        Storage.saveTag(tag);
+                    }
+                    
+                    // 重新渲染标签容器
+                    this.renderTagContainer();
+                    this.hideTagModal();
                 }
             }
             
@@ -1697,6 +2145,7 @@
                             </div>
                         </div>
                         <div class="button-group" style="margin-top: 10px;">
+                            <button class="btn btn-secondary edit-item-btn" data-item-id="${item.id}">编辑</button>
                             <button class="btn btn-secondary toggle-status-btn" data-item-id="${item.id}">切换状态</button>
                         </div>
                     `;
@@ -1724,7 +2173,7 @@
             bindItemEvents() {
                 // 添加物品按钮
                 document.getElementById('add-item-btn').addEventListener('click', () => {
-                    this.addItem();
+                    this.showItemModal();
                 });
                 
                 // 切换物品状态按钮
@@ -1734,19 +2183,73 @@
                         this.toggleItemStatus(itemId);
                     });
                 });
+                
+                // 编辑物品按钮
+                document.querySelectorAll('.edit-item-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const itemId = e.target.dataset.itemId;
+                        const items = Storage.getItems();
+                        const item = items.find(i => i.id === itemId);
+                        if (item) {
+                            this.showItemModal(item);
+                        }
+                    });
+                });
             }
             
-            addItem() {
-                const name = prompt('请输入物品名称:');
-                const transactionId = prompt('请输入关联交易ID:');
-                const startDate = prompt('请输入开始日期 (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
-                const endDate = prompt('请输入结束日期 (YYYY-MM-DD):');
+            showItemModal(item = null) {
+                if (item) {
+                    this.elements.itemId.value = item.id;
+                    this.elements.itemName.value = item.name;
+                    this.elements.itemTransactionId.value = item.transaction_id;
+                    this.elements.itemStartDate.value = item.start_date;
+                    this.elements.itemEndDate.value = item.end_date;
+                    this.elements.itemStatus.value = item.status;
+                    this.elements.itemModalTitle.textContent = '编辑物品';
+                } else {
+                    this.elements.itemId.value = '';
+                    this.elements.itemName.value = '';
+                    this.elements.itemTransactionId.value = '';
+                    this.elements.itemStartDate.value = new Date().toISOString().split('T')[0];
+                    this.elements.itemEndDate.value = '';
+                    this.elements.itemStatus.value = 'active';
+                    this.elements.itemModalTitle.textContent = '添加物品';
+                }
+                this.elements.itemModal.classList.add('active');
+                this.elements.itemName.focus();
+            }
+            
+            hideItemModal() {
+                this.elements.itemModal.classList.remove('active');
+                document.getElementById('item-form').reset();
+            }
+            
+            saveItem() {
+                const id = this.elements.itemId.value || Date.now().toString();
+                const name = this.elements.itemName.value;
+                const transactionId = this.elements.itemTransactionId.value;
+                const startDate = this.elements.itemStartDate.value;
+                const endDate = this.elements.itemEndDate.value;
+                const status = this.elements.itemStatus.value;
                 
                 if (name && startDate) {
-                    const id = Date.now().toString();
-                    const item = new Item(id, name, transactionId, startDate, endDate);
-                    Storage.saveItem(item);
+                    const item = new Item(id, name, transactionId, startDate, endDate, status);
+                    
+                    if (this.elements.itemId.value) {
+                        // 编辑现有物品
+                        const items = Storage.getItems();
+                        const index = items.findIndex(i => i.id === id);
+                        if (index !== -1) {
+                            items[index] = item;
+                            localStorage.setItem('items', JSON.stringify(items));
+                        }
+                    } else {
+                        // 添加新物品
+                        Storage.saveItem(item);
+                    }
+                    
                     this.calculateItemStats();
+                    this.hideItemModal();
                 }
             }
             
